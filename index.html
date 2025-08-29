@@ -441,7 +441,7 @@
               At its center lies $GARDEN — the seed of origin, the keeper of
               renewal. Each token a fragment of dawnlight, each movement a root
               that extends through the Heaven meta. It nourishes the cycle,
-              binding creation to return, growth to decay, silence to song.
+              binding creation to return, growth to decay, silence to song.
             </p>
 
             <h2
@@ -1062,9 +1062,9 @@
                 Garden Of Dawns was created by Unseen Studio, specialists in
                 immersive digital experiences.<br /><br />
                 This experiment challenges perceptions of what a real time
-                experience can be, pushes the boundaries of what’s possible and
+                experience can be, pushes the boundaries of what's possible and
                 explores new ways of telling brand stories. If you want to bring
-                your brand to life online then we’d love to hear from you.
+                your brand to life online then we'd love to hear from you.
               </div>
 
               <a
@@ -1213,7 +1213,7 @@
               data-subtitle="chapter-1-2"
             >
               Millennia ago, immense glaciers carved deep impressions into the
-              Earth’s canvas.
+              Earth's canvas.
             </div>
             <div
               class="chapter-subtitles__subtitle"
@@ -1234,7 +1234,7 @@
               data-subtitle="chapter-2-1"
             >
               Rivers were spawned as the mighty tectonic plates stirred beneath
-              the earth’s surface.
+              the earth's surface.
             </div>
             <div
               class="chapter-subtitles__subtitle chapter-subtitles__subtitle--right"
@@ -1300,7 +1300,7 @@
               class="chapter-subtitles__subtitle chapter-subtitles__subtitle--center"
               data-subtitle="outro-2"
             >
-              This distinctive ‘terroir’ fingerprint reveals itself through
+              This distinctive 'terroir' fingerprint reveals itself through
               colours, textures, aromas, and flavours perfected by time.
             </div>
           </div>
@@ -1450,6 +1450,25 @@
         assetsUrl:
           "https:\/\/symphonyofvines.vercel.app\/wp-content\/themes\/las-cases\/resources\/assets\/",
       };
+      
+      // Prevent #sov related JavaScript errors
+      window.addEventListener('error', function(e) {
+        if (e.message && e.message.includes('sov')) {
+          e.preventDefault();
+          return false;
+        }
+      });
+      
+      // Override any functions that might reference #sov
+      if (typeof window.no === 'function') {
+        const originalNo = window.no;
+        window.no = function(...args) {
+          if (args[0] && typeof args[0] === 'string' && args[0].includes('id="sov"')) {
+            return; // Skip sov SVG definition
+          }
+          return originalNo.apply(this, args);
+        };
+      }
     </script>
     <script
       type="module"
